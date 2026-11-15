@@ -13,7 +13,6 @@
     --emerald:#0E3E4F;
     --emerald-deep:#092B37;
     
-    /* Палитра */
     --sun:#F5C542;      
     --orange:#FF7A00;   
     --blood:#D32F2F;    
@@ -43,7 +42,7 @@
     overflow-x: hidden; 
   }
   
-  /* ХОЛСТ ДЛЯ ЭФФЕКТА ВОДЫ */
+  /* ХОЛСТ ДЛЯ ВОДЫ */
   #water-canvas {
     position: fixed;
     top: 0;
@@ -52,8 +51,9 @@
     height: 100%;
     pointer-events: none; 
     z-index: 9999; 
-    /* Смешиваем холст с фоном для объема */
-    mix-blend-mode: screen; 
+    /* Наложение, чтобы вода выглядела как черное прозрачное стекло */
+    mix-blend-mode: overlay;
+    opacity: 0.8;
   }
 
   a{color:inherit; text-decoration:none}
@@ -493,75 +493,89 @@
     carousel.scrollLeft = scrollLeft - walk;
   });
 
-  // --- 2. ОБЪЕМНЫЙ ЭФФЕКТ ВОДЫ ---
+  // --- 2. РЕАЛИСТИЧНАЯ ВОДА (ВОЛНОВАЯ СИМУЛЯЦИЯ) ---
   const canvas = document.getElementById('water-canvas');
   const ctx = canvas.getContext('2d');
-  let width, height;
-  let ripples = [];
   
+  // Настройки сетки воды (чем меньше, тем быстрее, но грубее)
+  const simRes = 4; 
+  let width, height, cols, rows;
+  let current = [], previous = [];
+  
+  function initGrid() {
+    cols = Math.floor(window.innerWidth / simRes) + 1;
+    rows = Math.floor(window.innerHeight / simRes) + 1;
+    current = new Float32Array(cols * rows);
+    previous = new Float32Array(cols * rows);
+  }
+
   function resize() {
-    width = canvas.width = window.innerWidth;
-    height = canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    initGrid();
   }
   window.addEventListener('resize', resize);
   resize();
 
-  class Ripple {
-    constructor(x, y) {
-      this.x = x;
-      this.y = y;
-      this.radius = 10; // Начальный радиус
-      this.opacity = 0.4; // Начальная прозрачность (сделали менее яркой)
-      this.velocity = 2 + Math.random() * 2; // Скорость расширения
-    }
-
-    update() {
-      this.radius += this.velocity;
-      this.opacity -= 0.008; // Плавное затухание
-    }
-
-    draw() {
-      if (this.opacity <= 0) return;
-      
-      // Создаем радиальный градиент для объема
-      const gradient = ctx.createRadialGradient(
-        this.x, this.y, this.radius * 0.5, 
-        this.x, this.y, this.radius
-      );
-      
-      // Внутри прозрачно, к краю появляется мягкое свечение (цвет воды)
-      gradient.addColorStop(0, `rgba(91, 184, 214, 0)`); 
-      gradient.addColorStop(1, `rgba(91, 184, 214, ${this.opacity})`);
-
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-      
-      // Рисуем заливку с градиентом
-      ctx.fillStyle = gradient;
-      ctx.fill();
-    }
-  }
-
-  // Отслеживаем движение мыши
+  // Взаимодействие с мышью (добавляем импульс в сетку)
   window.addEventListener('mousemove', (e) => {
-    // Создаем рябь не каждый пиксель, а с небольшой задержкой, чтобы не грузить браузер
-    if (Math.random() > 0.6) { 
-       ripples.push(new Ripple(e.clientX, e.clientY));
+    const x = Math.floor(e.clientX / simRes);
+    const y = Math.floor(e.clientY / simRes);
+    
+    // Если мышь в пределах сетки
+    if (x > 2 && x < cols - 2 && y > 2 && y < rows - 2) {
+      // Опускаем воду в точке курсора
+      for(let i = -2; i <= 2; i++) {
+        for(let j = -2; j <= 2; j++) {
+           const index = (y + i) * cols + (x + j);
+           // -500 это сила удара (чем больше, тем глубже вмятина)
+           current[index] = -500; 
+        }
+      }
     }
   });
 
-  // Анимация
+  // Отрисовка
   function animate() {
-    ctx.clearRect(0, 0, width, height); 
-
-    for (let i = ripples.length - 1; i >= 0; i--) {
-      ripples[i].update();
-      ripples[i].draw();
-      
-      if (ripples[i].opacity <= 0) {
-        ripples.splice(i, 1);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    // Физика волн (вычисляем новую высоту каждой точки)
+    for (let y = 1; y < rows - 1; y++) {
+      for (let x = 1; x < cols - 1; x++) {
+        const i = y * cols + x;
+        // Алгоритм распространения волны
+        const val = (previous[i - 1] + previous[i + 1] + previous[i - cols] + previous[i + cols]) / 2 - current[i];
+        previous[i] = val;
+        // Затухание (чем меньше 0.99, тем быстрее исчезают волны)
+        current[i] = val * 0.99; 
       }
     }
+
+    // Рисуем свет, отражающийся от волн
+    for (let y = 1; y < rows - 1; y++) {
+      for (let x = 1; x < cols - 1; x++) {
+        const i = y * cols + x;
+        // Вычисляем разницу высот для создания эффекта преломления света
+        const diff = current[i - 1] - current[i + 1];
+        
+        // Рисуем только там, где есть движение (волны)
+        if (Math.abs(diff) > 2) {
+          const alpha = Math.min(Math.abs(diff) / 100, 1); // Прозрачность зависит от высоты волны
+          
+          // Цвет воды: черный и белый (для наложения overlay)
+          const color = diff > 0 ? `rgba(255, 255, 255, ${alpha})` : `rgba(0, 0, 0, ${alpha})`;
+          
+          ctx.fillStyle = color;
+          ctx.fillRect(x * simRes, y * simRes, simRes, simRes);
+        }
+      }
+    }
+
+    // Обновляем состояние сетки
+    const temp = previous;
+    previous = current;
+    current = temp;
+
     requestAnimationFrame(animate);
   }
   animate();
