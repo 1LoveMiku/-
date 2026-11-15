@@ -7,14 +7,18 @@
 <meta name="description" content="Портфолио и резюме Александра Антоненко">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<!-- Добавили шрифт Unbounded для заголовков и Inter для текста -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Unbounded:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
   :root{
     --emerald:#0E3E4F;
     --emerald-deep:#092B37;
     --sky:#5BB8D6;
     --sun:#F5C542;
-    --lime:#A8D95A;
+    
+    /* Новый кровавый акцент */
+    --blood:#D32F2F; 
+    --blood-hover:#B71C1C;
 
     --bg:#121212;
     --card:#1E1E1E;
@@ -47,34 +51,37 @@
     display:flex; flex-direction:column; justify-content:space-between;
     padding:40px; overflow:hidden;
     background-color: var(--emerald-deep);
-    background-image: linear-gradient(135deg, rgba(9,43,55,0.5) 0%, rgba(14,62,79,0.2) 100%), url('cover.jpg');
+    background-image: linear-gradient(135deg, rgba(9,43,55,0.6) 0%, rgba(14,62,79,0.3) 100%), url('cover.jpg');
     background-size:cover; background-position: center 25%;
     color:#fff;
-    border-bottom: 4px solid var(--emerald);
+    border-bottom: 4px solid var(--blood); /* Кровавая полоса снизу */
   }
   .hero-cover > *{position:relative; z-index:1}
 
   .cover-nav{
     display:flex; justify-content:space-between; align-items:center;
+    font-family: 'Unbounded', sans-serif;
     font-weight:700; text-transform:uppercase; letter-spacing:0.05em; font-size:0.85rem;
   }
   .cover-nav .logo{font-size:1.2rem; font-weight:900; letter-spacing:-0.02em;}
   .cover-nav .nav-links{display:flex; gap:24px;}
-  .cover-nav a:hover{color:var(--sky); transition:color 0.2s;}
+  .cover-nav a:hover{color:var(--blood); transition:color 0.2s;}
 
   .cover-main{
     display:flex; flex-direction:column; align-items:flex-start; gap:16px;
     margin-bottom: 40px;
   }
   .cover-main h1{
-    font-size: clamp(3.5rem, 10vw, 7rem); font-weight:900; line-height:0.95;
-    letter-spacing:-0.04em; text-transform:uppercase;
+    font-family: 'Unbounded', sans-serif;
+    font-size: clamp(3rem, 8vw, 6rem); font-weight:900; line-height:1.05;
+    letter-spacing:-0.03em; text-transform:uppercase;
     text-shadow: 0 4px 30px rgba(0,0,0,0.8);
   }
   .cover-main .role-tag{
-    display:inline-block; background:var(--sun); color:var(--emerald-deep);
-    padding:8px 16px; border-radius:6px; font-weight:800; font-size:1.1rem;
-    text-transform:uppercase; letter-spacing:0.02em;
+    display:inline-block; background:var(--blood); color:#fff;
+    padding:8px 16px; border-radius:6px; font-weight:700; font-size:1rem;
+    text-transform:uppercase; letter-spacing:0.05em;
+    font-family: 'Unbounded', sans-serif;
   }
   .cover-main .tagline{
     font-size:1.15rem; max-width:50ch; font-weight:500; opacity:0.95;
@@ -84,19 +91,20 @@
   .cover-footer{
     display:flex; justify-content:space-between; align-items:flex-end;
     border-top:1px solid rgba(255,255,255,0.3); padding-top:20px;
+    font-family: 'Unbounded', sans-serif; font-size:0.8rem;
   }
   .scroll-hint{
-    display:flex; align-items:center; gap:10px; font-weight:600; font-size:0.9rem;
+    display:flex; align-items:center; gap:10px; font-weight:700;
     text-transform:uppercase; letter-spacing:0.1em; opacity:0.8;
-    animation: bounce 2s infinite; cursor:pointer;
+    animation: bounce 2s infinite; cursor:pointer; color:var(--blood);
   }
   @keyframes bounce {
     0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
     40% {transform: translateY(-8px);}
     60% {transform: translateY(-4px);}
   }
-  .cover-contacts-mini{display:flex; gap:16px; font-size:0.85rem; font-weight:500; opacity:0.9;}
-  .cover-contacts-mini a:hover{color:var(--sun);}
+  .cover-contacts-mini{display:flex; gap:16px; font-weight:500; opacity:0.9;}
+  .cover-contacts-mini a:hover{color:var(--blood);}
 
   /* ====== ОСНОВНОЙ КОНТЕНТ ====== */
   .container{max-width:1400px; margin:0 auto; padding:80px 40px 64px}
@@ -111,41 +119,47 @@
   }
   .card h2{
     display:flex; align-items:center; gap:12px;
-    font-size:0.85rem; font-weight:800; letter-spacing:0.12em; text-transform:uppercase;
-    color:var(--muted); margin-bottom:24px;
+    font-family: 'Unbounded', sans-serif;
+    font-size:1rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase;
+    color:var(--text); margin-bottom:24px;
+    border-bottom: 2px solid var(--blood); padding-bottom: 10px;
   }
   .card p { color: #d1d1d1; }
 
   .grid{display:grid; grid-template-columns:1.3fr 1fr; gap:40px; align-items:start}
   .col{display:flex; flex-direction:column}
 
+  /* ====== Timeline ====== */
   .timeline{position:relative; padding-left:32px}
   .timeline::before{
     content:""; position:absolute; left:6px; top:8px; bottom:8px;
     width:4px; border-radius:4px;
-    background:linear-gradient(to bottom, var(--emerald), var(--sky) 55%, var(--lime));
+    background:linear-gradient(to bottom, var(--emerald), var(--blood) 50%, var(--blood)); /* Перекрасили линию */
   }
   .job{position:relative; padding-bottom:28px}
   .job:last-child{padding-bottom:0}
   .job::before{
     content:""; position:absolute; left:-30px; top:7px;
     width:14px; height:14px; border-radius:50%;
-    background:var(--emerald); border:4px solid var(--card);
-    box-shadow:0 0 0 2px var(--sky);
+    background:var(--blood); border:4px solid var(--card);
+    box-shadow:0 0 0 2px var(--blood);
   }
   .job-head{display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; align-items:baseline}
-  .job-title{font-weight:800; font-size:1.1rem; color:#fff}
-  .job-company{color:var(--sky); font-weight:700; font-size:1rem; margin-top:2px}
+  .job-title{font-family: 'Unbounded', sans-serif; font-weight:700; font-size:1.05rem; color:#fff}
+  .job-company{color:var(--blood); font-weight:700; font-size:1rem; margin-top:4px; display:block;}
+  .job-company a { text-decoration: underline; }
+  .job-company a:hover { color: #fff; }
+  
   .dates{
-    color:var(--muted); font-size:0.8rem; font-weight:700;
+    color:var(--muted); font-size:0.8rem; font-weight:600;
     background:var(--accent-soft); padding:4px 12px; border-radius:999px;
     white-space:nowrap;
   }
   .job ul{margin:12px 0 0; padding-left:20px; color:var(--muted); font-size:0.95rem}
   .job li{margin-bottom:8px}
-  .job li::marker{color:var(--sun)}
+  .job li::marker{color:var(--blood); font-size:1.2em;} /* Кровавые маркеры */
 
-  /* ====== НОВЫЙ БЛОК: ГОРИЗОНТАЛЬНАЯ КАРУСЕЛЬ (СТРИТ БИТ СТАЙЛ) ====== */
+  /* ====== НОВЫЙ БЛОК: ГОРИЗОНТАЛЬНАЯ КАРУСЕЛЬ ====== */
   .street-carousel-wrapper {
     position: relative;
     width: 100%;
@@ -160,19 +174,15 @@
     gap: 20px;
     padding: 20px;
     cursor: grab;
-    /* Плавная прокрутка */
     scroll-behavior: smooth;
     overflow-x: auto;
-    /* Прячем скроллбар для чистоты */
     scrollbar-width: none; 
     -ms-overflow-style: none;
   }
-  .street-carousel-track::-webkit-scrollbar {
-    display: none;
-  }
+  .street-carousel-track::-webkit-scrollbar { display: none; }
   
   .street-carousel-item {
-    flex: 0 0 350px; /* Ширина карточки */
+    flex: 0 0 350px;
     height: 400px;
     border-radius: 12px;
     overflow: hidden;
@@ -181,71 +191,51 @@
     position: relative;
     transition: border-color 0.3s;
   }
-  .street-carousel-item:hover {
-    border-color: var(--sky);
-  }
+  .street-carousel-item:hover { border-color: var(--blood); }
   .street-carousel-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    pointer-events: none; /* Чтобы картинка не мешала перетаскиванию */
-    transform: scale(1.05); /* Обрезка белых рамок */
+    width: 100%; height: 100%; object-fit: cover;
+    pointer-events: none;
+    transform: scale(1.05);
   }
 
   /* ====== Expo Gallery ====== */
   .expo-gallery {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    margin-top: 16px;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 20px; margin-top: 16px;
   }
   .expo-item {
-    position: relative;
-    border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid var(--border);
+    position: relative; border-radius: 12px;
+    overflow: hidden; border: 1px solid var(--border);
   }
   .expo-item img {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.4s;
+    width: 100%; height: 250px; object-fit: cover;
+    display: block; transition: transform 0.4s;
   }
-  .expo-item:hover img {
-    transform: scale(1.05);
-  }
+  .expo-item:hover img { transform: scale(1.05); }
   .expo-caption {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(transparent, rgba(0,0,0,0.8));
-    padding: 15px;
-    color: #fff;
-    font-size: 0.9rem;
-    font-weight: 600;
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.9));
+    padding: 15px; color: #fff; font-size: 0.9rem; font-weight: 600;
   }
   .expo-caption a {
-    color: var(--sun);
-    text-decoration: underline;
-    margin-left: 5px;
+    color: var(--blood); text-decoration: underline; margin-left: 5px;
   }
   .expo-caption a:hover { color: #fff; }
 
   /* ====== Chips / Skills ====== */
   .skill-group{margin-bottom:28px}
   .skill-group:last-child{margin-bottom:0}
-  .skill-group h3{font-size:0.8rem; font-weight:700; color:var(--muted); margin-bottom:12px; text-transform:uppercase; letter-spacing:0.05em;}
+  .skill-group h3{font-family: 'Unbounded', sans-serif; font-size:0.75rem; font-weight:700; color:var(--muted); margin-bottom:12px; text-transform:uppercase; letter-spacing:0.05em;}
   .chips{list-style:none; display:flex; flex-wrap:wrap; gap:10px; padding:0; margin:0}
   .chips li{
     background:var(--accent-soft); color:#fff;
     font-size:0.85rem; font-weight:600; padding:6px 16px; border-radius:999px;
     border:1px solid var(--border);
   }
-  .chips li:nth-child(4n+1){border-color:var(--sky); color:var(--sky)}
-  .chips li:nth-child(4n+2){border-color:var(--sun); color:var(--sun)}
-  .chips li:nth-child(4n+3){border-color:var(--lime); color:var(--lime)}
+  /* Перекрасили чипсы в оттенки крови и пепла */
+  .chips li:nth-child(4n+1){border-color:var(--blood); color:#ff8a8a}
+  .chips li:nth-child(4n+2){border-color:#555; color:#ccc}
+  .chips li:nth-child(4n+3){border-color:var(--blood-hover); color:#ff5c5c}
 
   /* ====== Languages & Contacts ====== */
   .lang{display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-bottom:1px dashed var(--border); font-size:0.95rem; color:#d1d1d1;}
@@ -256,11 +246,12 @@
   footer{text-align:center; color:var(--muted); font-size:0.85rem; margin-top:60px; font-weight:500}
   .btn-print{
     display:inline-flex; align-items:center; gap:8px; margin-top:32px;
-    background:var(--emerald); color:#fff; border:none; cursor:pointer;
-    font:inherit; font-size:0.9rem; font-weight:700;
-    padding:14px 28px; border-radius:12px; transition:opacity 0.15s;
+    background:var(--blood); color:#fff; border:none; cursor:pointer;
+    font-family: 'Unbounded', sans-serif; font-size:0.85rem; font-weight:700;
+    padding:16px 32px; border-radius:12px; transition:background 0.2s;
+    text-transform: uppercase; letter-spacing: 0.05em;
   }
-  .btn-print:hover{opacity:0.9}
+  .btn-print:hover{background:var(--blood-hover)}
 
   /* ====== Responsive ====== */
   @media (max-width:900px){
@@ -269,7 +260,7 @@
   }
   @media (max-width:760px){
     .hero-cover{padding:24px; min-height:500px;}
-    .cover-main h1{font-size: 3.5rem;}
+    .cover-main h1{font-size: 2.8rem;}
     .cover-nav .nav-links{display:none;}
     .container{padding:40px 20px}
     .card{padding:24px 20px}
@@ -332,10 +323,9 @@
   <div class="grid">
     <div class="col">
       
-      <!-- БЛОК РАБОТ (КАРУСЕЛЬ) -->
       <section class="card" id="works">
         <h2>Разработка продукта «Ватафак»</h2>
-        <p style="margin-bottom: 0;">Дизайн и разработка линейки мерча для паблика <a href="https://vk.ru/vatfk" target="_blank" style="color:var(--sky); font-weight:600; text-decoration:underline;">«Ватафак»</a> (900 тыс. подписчиков). Листайте вправо/влево.</p>
+        <p style="margin-bottom: 0;">Дизайн и разработка линейки мерча для паблика <a href="https://vk.ru/vatfk" target="_blank" style="color:var(--blood); font-weight:600; text-decoration:underline;">«Ватафак»</a> (900 тыс. подписчиков). Листайте вправо/влево.</p>
         
         <div class="street-carousel-wrapper">
           <div class="street-carousel-track" id="carousel">
@@ -355,7 +345,10 @@
             <div class="job-head">
               <div>
                 <div class="job-title">Менеджер по маркетингу и продажам</div>
-                <div class="job-company">Строительная компания «Саврос»</div>
+                <!-- ДОБАВИЛИ ССЫЛКУ НА САВРОС -->
+                <div class="job-company">
+                  Строительная компания <a href="https://savros.ru/" target="_blank">«Саврос» ↗</a>
+                </div>
               </div>
               <div class="dates">5 лет</div>
             </div>
@@ -388,7 +381,7 @@
 
       <section class="card" id="exhibitions">
         <h2>Выставки Denkmal</h2>
-        <p>Участие в международных выставках по сохранению, реставрации и популяризации культурного наследия. Подробнее: <a href="https://ru.wikipedia.org/wiki/Denkmal" target="_blank" style="color:var(--sky); font-weight:600; text-decoration:underline;">Wikipedia</a>.</p>
+        <p>Участие в международных выставках по сохранению, реставрации и популяризации культурного наследия. Подробнее: <a href="https://ru.wikipedia.org/wiki/Denkmal" target="_blank" style="color:var(--blood); font-weight:600; text-decoration:underline;">Wikipedia</a>.</p>
         <div class="expo-gallery">
           <div class="expo-item">
             <img src="expo-1.jpg" alt="Denkmal Москва">
@@ -428,9 +421,9 @@
       <section class="card" id="contacts">
         <h2>Контакты</h2>
         <div class="lang"><span>Город</span><span class="lvl" style="color:var(--text)">Воронеж</span></div>
-        <div class="lang"><span>Телефон</span><a href="tel:+79521019974" style="color:var(--sky); font-weight:700;">+7 952 101-99-74</a></div>
-        <div class="lang"><span>Email</span><a href="mailto:sasha.antonenko0404@mail.ru" style="color:var(--sky); font-weight:700;">sasha.antonenko0404@mail.ru</a></div>
-        <div class="lang"><span>Telegram</span><a href="https://t.me/Rest420" target="_blank" rel="noopener" style="color:var(--sky); font-weight:700;">@Rest420</a></div>
+        <div class="lang"><span>Телефон</span><a href="tel:+79521019974" style="color:var(--blood); font-weight:700;">+7 952 101-99-74</a></div>
+        <div class="lang"><span>Email</span><a href="mailto:sasha.antonenko0404@mail.ru" style="color:var(--blood); font-weight:700;">sasha.antonenko0404@mail.ru</a></div>
+        <div class="lang"><span>Telegram</span><a href="https://t.me/Rest420" target="_blank" rel="noopener" style="color:var(--blood); font-weight:700;">@Rest420</a></div>
       </section>
     </div>
   </div>
@@ -439,31 +432,22 @@
   <footer class="no-print">Резюме обновлено в 2026 году</footer>
 </div>
 
-<!-- МАГИЯ ДЛЯ КАРУСЕЛИ: Перехватываем колесико мыши и листаем картинки -->
 <script>
   const carousel = document.getElementById('carousel');
-
-  // Функция для плавной прокрутки
   const scrollToNext = (direction) => {
-    const itemWidth = carousel.querySelector('.street-carousel-item').offsetWidth + 20; // 20 - это gap
+    const itemWidth = carousel.querySelector('.street-carousel-item').offsetWidth + 20; 
     const scrollAmount = direction === 'down' ? itemWidth : -itemWidth;
     carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
   };
 
-  // Слушаем колесико мыши
   carousel.addEventListener('wheel', (e) => {
-    // Если скроллят вниз или вверх
     if (e.deltaY !== 0) {
-      e.preventDefault(); // Отключаем стандартный вертикальный скролл страницы
-      if (e.deltaY > 0) {
-        scrollToNext('down');
-      } else {
-        scrollToNext('up');
-      }
+      e.preventDefault(); 
+      if (e.deltaY > 0) { scrollToNext('down'); } 
+      else { scrollToNext('up'); }
     }
   }, { passive: false });
 
-  // Дополнительно: возможность перетаскивать картинки мышкой (Drag to scroll)
   let isDown = false;
   let startX;
   let scrollLeft;
@@ -474,19 +458,13 @@
     startX = e.pageX - carousel.offsetLeft;
     scrollLeft = carousel.scrollLeft;
   });
-  carousel.addEventListener('mouseleave', () => {
-    isDown = false;
-    carousel.style.cursor = 'grab';
-  });
-  carousel.addEventListener('mouseup', () => {
-    isDown = false;
-    carousel.style.cursor = 'grab';
-  });
+  carousel.addEventListener('mouseleave', () => { isDown = false; carousel.style.cursor = 'grab'; });
+  carousel.addEventListener('mouseup', () => { isDown = false; carousel.style.cursor = 'grab'; });
   carousel.addEventListener('mousemove', (e) => {
     if (!isDown) return;
     e.preventDefault();
     const x = e.pageX - carousel.offsetLeft;
-    const walk = (x - startX) * 2; // Скорость перетаскивания
+    const walk = (x - startX) * 2; 
     carousel.scrollLeft = scrollLeft - walk;
   });
 </script>
