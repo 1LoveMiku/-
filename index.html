@@ -7,18 +7,17 @@
 <meta name="description" content="Портфолио и резюме Александра Антоненко">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- Добавили шрифт Unbounded для заголовков и Inter для текста -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Unbounded:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
   :root{
     --emerald:#0E3E4F;
     --emerald-deep:#092B37;
-    --sky:#5BB8D6;
-    --sun:#F5C542;
     
-    /* Новый кровавый акцент */
-    --blood:#D32F2F; 
-    --blood-hover:#B71C1C;
+    /* Новая сбалансированная палитра */
+    --sun:#F5C542;      /* Желтый */
+    --orange:#FF7A00;   /* Оранжевый */
+    --blood:#D32F2F;    /* Красный (только для важных деталей) */
+    --sky:#5BB8D6;      /* Голубой */
 
     --bg:#121212;
     --card:#1E1E1E;
@@ -54,7 +53,8 @@
     background-image: linear-gradient(135deg, rgba(9,43,55,0.6) 0%, rgba(14,62,79,0.3) 100%), url('cover.jpg');
     background-size:cover; background-position: center 25%;
     color:#fff;
-    border-bottom: 4px solid var(--blood); /* Кровавая полоса снизу */
+    /* Белая полоса снизу для контраста */
+    border-bottom: 4px solid #fff; 
   }
   .hero-cover > *{position:relative; z-index:1}
 
@@ -65,7 +65,7 @@
   }
   .cover-nav .logo{font-size:1.2rem; font-weight:900; letter-spacing:-0.02em;}
   .cover-nav .nav-links{display:flex; gap:24px;}
-  .cover-nav a:hover{color:var(--blood); transition:color 0.2s;}
+  .cover-nav a:hover{color:var(--sun); transition:color 0.2s;}
 
   .cover-main{
     display:flex; flex-direction:column; align-items:flex-start; gap:16px;
@@ -78,7 +78,7 @@
     text-shadow: 0 4px 30px rgba(0,0,0,0.8);
   }
   .cover-main .role-tag{
-    display:inline-block; background:var(--blood); color:#fff;
+    display:inline-block; background:var(--sun); color:#000;
     padding:8px 16px; border-radius:6px; font-weight:700; font-size:1rem;
     text-transform:uppercase; letter-spacing:0.05em;
     font-family: 'Unbounded', sans-serif;
@@ -95,8 +95,8 @@
   }
   .scroll-hint{
     display:flex; align-items:center; gap:10px; font-weight:700;
-    text-transform:uppercase; letter-spacing:0.1em; opacity:0.8;
-    animation: bounce 2s infinite; cursor:pointer; color:var(--blood);
+    text-transform:uppercase; letter-spacing:0.1em; opacity:0.9;
+    animation: bounce 2s infinite; cursor:pointer; color:var(--sun);
   }
   @keyframes bounce {
     0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
@@ -104,7 +104,7 @@
     60% {transform: translateY(-4px);}
   }
   .cover-contacts-mini{display:flex; gap:16px; font-weight:500; opacity:0.9;}
-  .cover-contacts-mini a:hover{color:var(--blood);}
+  .cover-contacts-mini a:hover{color:var(--sun);}
 
   /* ====== ОСНОВНОЙ КОНТЕНТ ====== */
   .container{max-width:1400px; margin:0 auto; padding:80px 40px 64px}
@@ -117,12 +117,14 @@
     margin-top:32px;
     position:relative;
   }
+  
+  /* Заголовки карточек теперь с оранжевым подчеркиванием */
   .card h2{
     display:flex; align-items:center; gap:12px;
     font-family: 'Unbounded', sans-serif;
     font-size:1rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase;
     color:var(--text); margin-bottom:24px;
-    border-bottom: 2px solid var(--blood); padding-bottom: 10px;
+    border-bottom: 2px solid var(--orange); padding-bottom: 10px;
   }
   .card p { color: #d1d1d1; }
 
@@ -131,71 +133,63 @@
 
   /* ====== Timeline ====== */
   .timeline{position:relative; padding-left:32px}
+  /* Линия таймлайна теперь градиентная: Желтый -> Оранжевый */
   .timeline::before{
     content:""; position:absolute; left:6px; top:8px; bottom:8px;
     width:4px; border-radius:4px;
-    background:linear-gradient(to bottom, var(--emerald), var(--blood) 50%, var(--blood)); /* Перекрасили линию */
+    background:linear-gradient(to bottom, var(--sun), var(--orange));
   }
   .job{position:relative; padding-bottom:28px}
   .job:last-child{padding-bottom:0}
+  
+  /* Точки на таймлайне: Желтые с оранжевой обводкой */
   .job::before{
     content:""; position:absolute; left:-30px; top:7px;
     width:14px; height:14px; border-radius:50%;
-    background:var(--blood); border:4px solid var(--card);
-    box-shadow:0 0 0 2px var(--blood);
+    background:var(--sun); border:4px solid var(--card);
+    box-shadow:0 0 0 2px var(--orange);
   }
+  
   .job-head{display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; align-items:baseline}
   .job-title{font-family: 'Unbounded', sans-serif; font-weight:700; font-size:1.05rem; color:#fff}
-  .job-company{color:var(--blood); font-weight:700; font-size:1rem; margin-top:4px; display:block;}
+  
+  /* Название компании: Оранжевое */
+  .job-company{color:var(--orange); font-weight:700; font-size:1rem; margin-top:4px; display:block;}
   .job-company a { text-decoration: underline; }
   .job-company a:hover { color: #fff; }
   
+  /* Плашки с датами: Желтый текст */
   .dates{
-    color:var(--muted); font-size:0.8rem; font-weight:600;
+    color:var(--sun); font-size:0.8rem; font-weight:600;
     background:var(--accent-soft); padding:4px 12px; border-radius:999px;
     white-space:nowrap;
   }
   .job ul{margin:12px 0 0; padding-left:20px; color:var(--muted); font-size:0.95rem}
   .job li{margin-bottom:8px}
-  .job li::marker{color:var(--blood); font-size:1.2em;} /* Кровавые маркеры */
+  /* Маркеры списка: Желтые */
+  .job li::marker{color:var(--sun); font-size:1.2em;} 
 
-  /* ====== НОВЫЙ БЛОК: ГОРИЗОНТАЛЬНАЯ КАРУСЕЛЬ ====== */
+  /* ====== ГОРИЗОНТАЛЬНАЯ КАРУСЕЛЬ ====== */
   .street-carousel-wrapper {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-    border-radius: 12px;
-    margin-top: 20px;
-    background: #000;
+    position: relative; width: 100%; overflow: hidden;
+    border-radius: 12px; margin-top: 20px; background: #000;
   }
-  
   .street-carousel-track {
-    display: flex;
-    gap: 20px;
-    padding: 20px;
-    cursor: grab;
-    scroll-behavior: smooth;
-    overflow-x: auto;
-    scrollbar-width: none; 
-    -ms-overflow-style: none;
+    display: flex; gap: 20px; padding: 20px; cursor: grab;
+    scroll-behavior: smooth; overflow-x: auto;
+    scrollbar-width: none; -ms-overflow-style: none;
   }
   .street-carousel-track::-webkit-scrollbar { display: none; }
-  
   .street-carousel-item {
-    flex: 0 0 350px;
-    height: 400px;
-    border-radius: 12px;
-    overflow: hidden;
-    background: #1a1a1a;
-    border: 1px solid var(--border);
-    position: relative;
-    transition: border-color 0.3s;
+    flex: 0 0 350px; height: 400px; border-radius: 12px;
+    overflow: hidden; background: #1a1a1a; border: 1px solid var(--border);
+    position: relative; transition: border-color 0.3s;
   }
-  .street-carousel-item:hover { border-color: var(--blood); }
+  /* При наведении рамка становится желтой */
+  .street-carousel-item:hover { border-color: var(--sun); }
   .street-carousel-item img {
     width: 100%; height: 100%; object-fit: cover;
-    pointer-events: none;
-    transform: scale(1.05);
+    pointer-events: none; transform: scale(1.05);
   }
 
   /* ====== Expo Gallery ====== */
@@ -218,7 +212,7 @@
     padding: 15px; color: #fff; font-size: 0.9rem; font-weight: 600;
   }
   .expo-caption a {
-    color: var(--blood); text-decoration: underline; margin-left: 5px;
+    color: var(--orange); text-decoration: underline; margin-left: 5px;
   }
   .expo-caption a:hover { color: #fff; }
 
@@ -227,15 +221,16 @@
   .skill-group:last-child{margin-bottom:0}
   .skill-group h3{font-family: 'Unbounded', sans-serif; font-size:0.75rem; font-weight:700; color:var(--muted); margin-bottom:12px; text-transform:uppercase; letter-spacing:0.05em;}
   .chips{list-style:none; display:flex; flex-wrap:wrap; gap:10px; padding:0; margin:0}
+  
+  /* Чипсы теперь белые, с цветной обводкой */
   .chips li{
     background:var(--accent-soft); color:#fff;
     font-size:0.85rem; font-weight:600; padding:6px 16px; border-radius:999px;
     border:1px solid var(--border);
   }
-  /* Перекрасили чипсы в оттенки крови и пепла */
-  .chips li:nth-child(4n+1){border-color:var(--blood); color:#ff8a8a}
-  .chips li:nth-child(4n+2){border-color:#555; color:#ccc}
-  .chips li:nth-child(4n+3){border-color:var(--blood-hover); color:#ff5c5c}
+  .chips li:nth-child(3n+1){border-color:var(--sun);}
+  .chips li:nth-child(3n+2){border-color:var(--orange);}
+  .chips li:nth-child(3n+3){border-color:var(--blood);} /* Немного красного для контраста */
 
   /* ====== Languages & Contacts ====== */
   .lang{display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-bottom:1px dashed var(--border); font-size:0.95rem; color:#d1d1d1;}
@@ -244,14 +239,16 @@
 
   /* ====== Footer ====== */
   footer{text-align:center; color:var(--muted); font-size:0.85rem; margin-top:60px; font-weight:500}
+  
+  /* Кнопка скачивания: Оранжевая */
   .btn-print{
     display:inline-flex; align-items:center; gap:8px; margin-top:32px;
-    background:var(--blood); color:#fff; border:none; cursor:pointer;
+    background:var(--orange); color:#fff; border:none; cursor:pointer;
     font-family: 'Unbounded', sans-serif; font-size:0.85rem; font-weight:700;
     padding:16px 32px; border-radius:12px; transition:background 0.2s;
     text-transform: uppercase; letter-spacing: 0.05em;
   }
-  .btn-print:hover{background:var(--blood-hover)}
+  .btn-print:hover{background:var(--sun); color: #000;}
 
   /* ====== Responsive ====== */
   @media (max-width:900px){
@@ -325,7 +322,7 @@
       
       <section class="card" id="works">
         <h2>Разработка продукта «Ватафак»</h2>
-        <p style="margin-bottom: 0;">Дизайн и разработка линейки мерча для паблика <a href="https://vk.ru/vatfk" target="_blank" style="color:var(--blood); font-weight:600; text-decoration:underline;">«Ватафак»</a> (900 тыс. подписчиков). Листайте вправо/влево.</p>
+        <p style="margin-bottom: 0;">Дизайн и разработка линейки мерча для паблика <a href="https://vk.ru/vatfk" target="_blank" style="color:var(--orange); font-weight:600; text-decoration:underline;">«Ватафак»</a> (900 тыс. подписчиков). Листайте вправо/влево.</p>
         
         <div class="street-carousel-wrapper">
           <div class="street-carousel-track" id="carousel">
@@ -345,7 +342,6 @@
             <div class="job-head">
               <div>
                 <div class="job-title">Менеджер по маркетингу и продажам</div>
-                <!-- ДОБАВИЛИ ССЫЛКУ НА САВРОС -->
                 <div class="job-company">
                   Строительная компания <a href="https://savros.ru/" target="_blank">«Саврос» ↗</a>
                 </div>
@@ -381,7 +377,7 @@
 
       <section class="card" id="exhibitions">
         <h2>Выставки Denkmal</h2>
-        <p>Участие в международных выставках по сохранению, реставрации и популяризации культурного наследия. Подробнее: <a href="https://ru.wikipedia.org/wiki/Denkmal" target="_blank" style="color:var(--blood); font-weight:600; text-decoration:underline;">Wikipedia</a>.</p>
+        <p>Участие в международных выставках по сохранению, реставрации и популяризации культурного наследия. Подробнее: <a href="https://ru.wikipedia.org/wiki/Denkmal" target="_blank" style="color:var(--orange); font-weight:600; text-decoration:underline;">Wikipedia</a>.</p>
         <div class="expo-gallery">
           <div class="expo-item">
             <img src="expo-1.jpg" alt="Denkmal Москва">
@@ -421,9 +417,9 @@
       <section class="card" id="contacts">
         <h2>Контакты</h2>
         <div class="lang"><span>Город</span><span class="lvl" style="color:var(--text)">Воронеж</span></div>
-        <div class="lang"><span>Телефон</span><a href="tel:+79521019974" style="color:var(--blood); font-weight:700;">+7 952 101-99-74</a></div>
-        <div class="lang"><span>Email</span><a href="mailto:sasha.antonenko0404@mail.ru" style="color:var(--blood); font-weight:700;">sasha.antonenko0404@mail.ru</a></div>
-        <div class="lang"><span>Telegram</span><a href="https://t.me/Rest420" target="_blank" rel="noopener" style="color:var(--blood); font-weight:700;">@Rest420</a></div>
+        <div class="lang"><span>Телефон</span><a href="tel:+79521019974" style="color:var(--sun); font-weight:700;">+7 952 101-99-74</a></div>
+        <div class="lang"><span>Email</span><a href="mailto:sasha.antonenko0404@mail.ru" style="color:var(--sun); font-weight:700;">sasha.antonenko0404@mail.ru</a></div>
+        <div class="lang"><span>Telegram</span><a href="https://t.me/Rest420" target="_blank" rel="noopener" style="color:var(--sun); font-weight:700;">@Rest420</a></div>
       </section>
     </div>
   </div>
