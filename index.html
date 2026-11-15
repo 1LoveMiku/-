@@ -3,302 +3,417 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Иван Иванов — Резюме</title>
-<meta name="description" content="Резюме в стилистике Street Beat">
+<title>Александр Антоненко — B2B-маркетолог / Дизайнер</title>
+<meta name="description" content="Портфолио и резюме Александра Антоненко">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   :root{
-    /* Палитра Street Beat */
-    --emerald:#0E3E4F;      /* тёмно-изумрудный, основной */
+    /* Палитра Street Beat / Urban */
+    --emerald:#0E3E4F;
     --emerald-deep:#092B37;
-    --sky:#5BB8D6;          /* голубой */
-    --sun:#F5C542;          /* жёлтый */
-    --lime:#A8D95A;         /* салатовый */
+    --sky:#5BB8D6;
+    --sun:#F5C542;
+    --lime:#A8D95A;
 
-    --bg:#F3F6F7;
-    --card:#FFFFFF;
-    --text:#102A33;
-    --muted:#5E7780;
-    --border:#DDE6E9;
+    --bg:#121212;
+    --card:#1E1E1E;
+    --text:#FFFFFF;
+    --muted:#A0A0A0;
+    --border:#333333;
     --radius:18px;
-    --shadow:0 2px 4px rgba(14,62,79,.04), 0 12px 32px rgba(14,62,79,.08);
-    --accent-soft:rgba(14,62,79,.06);
+    --shadow:0 4px 20px rgba(0,0,0,0.5);
+    --accent-soft:rgba(255,255,255,0.08);
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{
-    margin:0; background:var(--bg); color:var(--text);
+    margin:0; background-color:var(--bg); color:var(--text);
     font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
     line-height:1.6; -webkit-font-smoothing:antialiased;
+    /* ФОН С ФОТО 9 И РАЗМЫТИЕМ ПО КРАЯМ */
+    background-image: 
+      radial-gradient(circle, rgba(18,18,18,0) 0%, rgba(18,18,18,0.8) 50%, rgba(18,18,18,1) 100%),
+      url('bg-texture.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-blend-mode: overlay;
   }
   a{color:inherit; text-decoration:none}
   h1,h2,h3{line-height:1.2; margin:0}
-  .container{max-width:980px; margin:0 auto; padding:24px 20px 64px}
 
-  /* ====== Декоративный фон «карта города» ====== */
-  body::before{
-    content:""; position:fixed; inset:0; z-index:-1; opacity:.35;
-    background-image:
-      radial-gradient(circle at 20% 30%, rgba(91,184,214,.12) 0 2px, transparent 2px),
-      radial-gradient(circle at 80% 70%, rgba(168,217,90,.12) 0 2px, transparent 2px),
-      linear-gradient(115deg, transparent 48%, rgba(14,62,79,.03) 49%, rgba(14,62,79,.03) 51%, transparent 52%),
-      linear-gradient(25deg, transparent 48%, rgba(14,62,79,.03) 49%, rgba(14,62,79,.03) 51%, transparent 52%);
-    background-size:80px 80px, 120px 120px, 60px 60px, 90px 90px;
+  /* ====== ПОЛНОЭКРАННАЯ ОБЛОЖКА (ФОТО 6) ====== */
+  .hero-cover{
+    position:relative; height:100vh; min-height:650px; width:100%;
+    display:flex; flex-direction:column; justify-content:space-between;
+    padding:40px; overflow:hidden;
+    background-color: var(--emerald-deep);
+    background-image: linear-gradient(135deg, rgba(9,43,55,0.7) 0%, rgba(14,62,79,0.4) 100%), url('cover.jpg');
+    background-size:cover; background-position:center;
+    color:#fff;
+    border-bottom: 4px solid var(--emerald);
+  }
+  .hero-cover > *{position:relative; z-index:1}
+
+  .cover-nav{
+    display:flex; justify-content:space-between; align-items:center;
+    font-weight:700; text-transform:uppercase; letter-spacing:0.05em; font-size:0.85rem;
+  }
+  .cover-nav .logo{font-size:1.2rem; font-weight:900; letter-spacing:-0.02em;}
+  .cover-nav .nav-links{display:flex; gap:24px;}
+  .cover-nav a:hover{color:var(--sky); transition:color 0.2s;}
+
+  .cover-main{
+    display:flex; flex-direction:column; align-items:flex-start; gap:16px;
+    margin-bottom: 40px;
+  }
+  .cover-main h1{
+    font-size: clamp(3.5rem, 10vw, 7rem); font-weight:900; line-height:0.95;
+    letter-spacing:-0.04em; text-transform:uppercase;
+    text-shadow: 0 4px 30px rgba(0,0,0,0.8);
+  }
+  .cover-main .role-tag{
+    display:inline-block; background:var(--sun); color:var(--emerald-deep);
+    padding:8px 16px; border-radius:6px; font-weight:800; font-size:1.1rem;
+    text-transform:uppercase; letter-spacing:0.02em;
+  }
+  .cover-main .tagline{
+    font-size:1.15rem; max-width:50ch; font-weight:500; opacity:0.95;
+    margin-top:8px; text-shadow: 0 2px 15px rgba(0,0,0,0.8); line-height:1.5;
   }
 
-  /* ====== Hero ====== */
-  .hero{
-    position:relative; overflow:hidden;
-    display:flex; gap:32px; align-items:center; flex-wrap:wrap;
-    padding:40px 36px; margin-top:28px;
-    background:var(--card); border-radius:24px; box-shadow:var(--shadow);
-    border-top:6px solid var(--emerald);
+  .cover-footer{
+    display:flex; justify-content:space-between; align-items:flex-end;
+    border-top:1px solid rgba(255,255,255,0.3); padding-top:20px;
   }
-  .hero::after{
-    content:""; position:absolute; right:-40px; top:-40px;
-    width:220px; height:220px; border-radius:50%;
-    background:conic-gradient(from 210deg, var(--emerald) 0 25%, var(--sky) 25% 50%, var(--sun) 50% 75%, var(--lime) 75% 100%);
-    opacity:.12;
+  .scroll-hint{
+    display:flex; align-items:center; gap:10px; font-weight:600; font-size:0.9rem;
+    text-transform:uppercase; letter-spacing:0.1em; opacity:0.8;
+    animation: bounce 2s infinite; cursor:pointer;
   }
-  .avatar{
-    width:128px; height:128px; border-radius:50%; flex:none; position:relative; z-index:1;
-    display:grid; place-items:center; overflow:hidden;
-    background:var(--emerald);
-    border:5px solid var(--card);
-    box-shadow:0 0 0 2px var(--sky), var(--shadow);
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+    40% {transform: translateY(-8px);}
+    60% {transform: translateY(-4px);}
   }
-  .avatar::before{
-    content:attr(data-initials); font-weight:900; font-size:2.1rem; color:var(--card);
-  }
-  .avatar img{width:100%; height:100%; object-fit:cover; position:relative; z-index:1}
-  .hero-info{flex:1; min-width:260px; position:relative; z-index:1}
-  .hero-info h1{font-size:2.2rem; font-weight:900; letter-spacing:-.03em; color:var(--emerald)}
-  .role{
-    display:inline-block; margin-top:8px; padding:4px 14px; border-radius:999px;
-    background:var(--emerald); color:#fff; font-weight:700; font-size:.92rem;
-  }
-  .tagline{color:var(--muted); margin:14px 0 0; max-width:56ch; font-weight:500}
-  .contacts{display:flex; flex-wrap:wrap; gap:10px 20px; margin-top:20px}
-  .contact{
-    display:inline-flex; align-items:center; gap:7px; font-size:.88rem;
-    color:var(--muted); font-weight:600; transition:color .15s;
-  }
-  .contact:hover{color:var(--emerald)}
-  .ic{width:17px; height:17px; flex:none; color:var(--sky)}
+  .cover-contacts-mini{display:flex; gap:16px; font-size:0.85rem; font-weight:500; opacity:0.9;}
+  .cover-contacts-mini a:hover{color:var(--sun);}
+
+  /* ====== ОСНОВНОЙ КОНТЕНТ ====== */
+  .container{max-width:1000px; margin:0 auto; padding:60px 20px 64px}
 
   /* ====== Cards ====== */
   .card{
-    background:var(--card); border:1px solid var(--border);
+    background:rgba(30,30,30,0.85); backdrop-filter: blur(10px);
+    border:1px solid var(--border);
     border-radius:var(--radius); box-shadow:var(--shadow);
-    padding:28px 30px; margin-top:22px; position:relative;
+    padding:32px 36px; margin-top:24px; position:relative;
   }
   .card h2{
-    display:flex; align-items:center; gap:10px;
-    font-size:.8rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase;
-    color:var(--muted); margin-bottom:20px;
+    display:flex; align-items:center; gap:12px;
+    font-size:0.85rem; font-weight:800; letter-spacing:0.12em; text-transform:uppercase;
+    color:var(--muted); margin-bottom:24px;
   }
   .card h2::before{
-    content:""; width:8px; height:8px; border-radius:2px; background:var(--sun);
-    box-shadow:12px 0 0 var(--lime), 24px 0 0 var(--sky);
+    content:""; width:10px; height:10px; border-radius:2px; background:var(--sun);
+    box-shadow:14px 0 0 var(--lime), 28px 0 0 var(--sky);
   }
+  .card p { color: #d1d1d1; }
 
   /* ====== Grid ====== */
-  .grid{display:grid; grid-template-columns:1.55fr 1fr; gap:22px; align-items:start}
+  .grid{display:grid; grid-template-columns:1.6fr 1fr; gap:24px; align-items:start}
   .col{display:flex; flex-direction:column}
 
   /* ====== Timeline ====== */
-  .timeline{position:relative; padding-left:30px}
+  .timeline{position:relative; padding-left:32px}
   .timeline::before{
     content:""; position:absolute; left:6px; top:8px; bottom:8px;
-    width:3px; border-radius:3px;
+    width:4px; border-radius:4px;
     background:linear-gradient(to bottom, var(--emerald), var(--sky) 55%, var(--lime));
   }
-  .job{position:relative; padding-bottom:26px}
+  .job{position:relative; padding-bottom:28px}
   .job:last-child{padding-bottom:0}
   .job::before{
-    content:""; position:absolute; left:-28px; top:7px;
-    width:12px; height:12px; border-radius:50%;
-    background:var(--emerald); border:3px solid var(--card);
+    content:""; position:absolute; left:-30px; top:7px;
+    width:14px; height:14px; border-radius:50%;
+    background:var(--emerald); border:4px solid var(--card);
     box-shadow:0 0 0 2px var(--sky);
   }
   .job-head{display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; align-items:baseline}
-  .job-title{font-weight:800; font-size:1rem}
-  .job-company{color:var(--emerald); font-weight:700; font-size:.9rem}
+  .job-title{font-weight:800; font-size:1.1rem; color:#fff}
+  .job-company{color:var(--sky); font-weight:700; font-size:1rem; margin-top:2px}
   .dates{
-    color:var(--muted); font-size:.78rem; font-weight:600;
-    background:var(--accent-soft); padding:2px 10px; border-radius:999px;
+    color:var(--muted); font-size:0.8rem; font-weight:700;
+    background:var(--accent-soft); padding:4px 12px; border-radius:999px;
+    white-space:nowrap;
   }
-  .job ul{margin:10px 0 0; padding-left:18px; color:var(--muted); font-size:.9rem}
-  .job li{margin-bottom:6px}
-  .job li::marker{color:var(--sky)}
+  .job ul{margin:12px 0 0; padding-left:20px; color:var(--muted); font-size:0.95rem}
+  .job li{margin-bottom:8px}
+  .job li::marker{color:var(--sun)}
 
-  /* ====== Chips ====== */
-  .skill-group{margin-bottom:20px}
+  /* ====== Portfolio Grid (ФОТО 1-5) ====== */
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-top: 16px;
+  }
+  .portfolio-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .portfolio-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+    border-color: var(--sky);
+  }
+  .portfolio-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* ====== Expo Gallery (ФОТО 7-8) ====== */
+  .expo-gallery {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 16px;
+  }
+  .expo-item {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .expo-item img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s;
+  }
+  .expo-item:hover img {
+    transform: scale(1.05);
+  }
+  .expo-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    padding: 15px;
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+  .expo-caption a {
+    color: var(--sun);
+    text-decoration: underline;
+    margin-left: 5px;
+  }
+  .expo-caption a:hover { color: #fff; }
+
+  /* ====== Chips / Skills ====== */
+  .skill-group{margin-bottom:24px}
   .skill-group:last-child{margin-bottom:0}
-  .skill-group h3{font-size:.78rem; font-weight:700; color:var(--muted); margin-bottom:10px}
-  .chips{list-style:none; display:flex; flex-wrap:wrap; gap:8px; padding:0; margin:0}
+  .skill-group h3{font-size:0.8rem; font-weight:700; color:var(--muted); margin-bottom:12px; text-transform:uppercase; letter-spacing:0.05em;}
+  .chips{list-style:none; display:flex; flex-wrap:wrap; gap:10px; padding:0; margin:0}
   .chips li{
-    background:var(--accent-soft); color:var(--emerald);
-    font-size:.8rem; font-weight:700; padding:5px 13px; border-radius:999px;
-    border:1px solid rgba(14,62,79,.08);
+    background:var(--accent-soft); color:#fff;
+    font-size:0.85rem; font-weight:600; padding:6px 16px; border-radius:999px;
+    border:1px solid var(--border);
   }
-  /* Цветовое разнообразие чипов, как в палитре бренда */
-  .chips li:nth-child(4n+1){border-color:var(--sky); color:var(--emerald)}
-  .chips li:nth-child(4n+2){border-color:var(--sun); color:var(--emerald)}
-  .chips li:nth-child(4n+3){border-color:var(--lime); color:var(--emerald)}
+  .chips li:nth-child(4n+1){border-color:var(--sky); color:var(--sky)}
+  .chips li:nth-child(4n+2){border-color:var(--sun); color:var(--sun)}
+  .chips li:nth-child(4n+3){border-color:var(--lime); color:var(--lime)}
 
-  /* ====== Languages ====== */
-  .lang{display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px dashed var(--border); font-size:.9rem}
+  /* ====== Languages & Contacts ====== */
+  .lang{display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-bottom:1px dashed var(--border); font-size:0.95rem; color:#d1d1d1;}
   .lang:last-child{border-bottom:none; padding-bottom:0}
-  .lang .lvl{color:var(--muted); font-size:.8rem; font-weight:600}
+  .lang .lvl{color:var(--muted); font-size:0.85rem; font-weight:700;}
 
   /* ====== Footer ====== */
-  footer{text-align:center; color:var(--muted); font-size:.8rem; margin-top:44px; font-weight:500}
+  footer{text-align:center; color:var(--muted); font-size:0.85rem; margin-top:60px; font-weight:500}
   .btn-print{
     display:inline-flex; align-items:center; gap:8px; margin-top:24px;
     background:var(--emerald); color:#fff; border:none; cursor:pointer;
-    font:inherit; font-size:.88rem; font-weight:700;
-    padding:12px 22px; border-radius:12px; transition:opacity .15s;
+    font:inherit; font-size:0.9rem; font-weight:700;
+    padding:14px 28px; border-radius:12px; transition:opacity 0.15s;
   }
-  .btn-print:hover{opacity:.88}
+  .btn-print:hover{opacity:0.9}
 
   /* ====== Responsive ====== */
   @media (max-width:760px){
+    .hero-cover{padding:24px; min-height:500px;}
+    .cover-main h1{font-size: 3.5rem;}
+    .cover-nav .nav-links{display:none;}
     .grid{grid-template-columns:1fr}
-    .hero{padding:28px 22px; gap:22px}
-    .avatar{width:96px; height:96px}
-    .hero-info h1{font-size:1.7rem}
-    .card{padding:22px 20px}
+    .card{padding:24px 20px}
+    .cover-footer{flex-direction:column; align-items:flex-start; gap:16px;}
+    .expo-gallery { grid-template-columns: 1fr; }
+    .expo-item img { height: 200px; }
+    .portfolio-item img { height: 150px; }
   }
 
   /* ====== Print ====== */
   @media print{
-    body{background:#fff; color:#111}
-    body::before{display:none}
+    body{background:#fff !important; color:#111 !important;}
     .no-print{display:none !important}
+    .hero-cover{height:auto; min-height:auto; padding:20px; background:var(--emerald) !important; color:#fff !important;}
     .container{max-width:100%; padding:0}
-    .card,.hero{box-shadow:none; border:1px solid #ddd; break-inside:avoid; margin-top:14px}
-    .hero{border-top:4px solid #0E3E4F}
+    .card{background:#fff !important; border:1px solid #ddd !important; box-shadow:none !important; break-inside:avoid; margin-top:14px}
+    .hero-cover{break-inside:avoid;}
+    .job-title, .card p, .lang { color: #111 !important; }
   }
 </style>
 </head>
 <body>
 
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></symbol>
-  <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
-  <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></symbol>
-  <symbol id="i-github" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></symbol>
-  <symbol id="i-send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></symbol>
-</svg>
+<!-- ====== ПОЛНОЭКРАННАЯ ОБЛОЖКА (ФОТО 6) ====== -->
+<header class="hero-cover" id="top">
+  <nav class="cover-nav">
+    <div class="logo">A. ANTONENKO</div>
+    <div class="nav-links">
+      <a href="#works">Работы</a>
+      <a href="#experience">Опыт</a>
+      <a href="#skills">Навыки</a>
+      <a href="#contacts">Контакты</a>
+    </div>
+  </nav>
 
+  <div class="cover-main">
+    <span class="role-tag">B2B-маркетолог / Дизайнер</span>
+    <h1>Александр<br>Антоненко</h1>
+    <p class="tagline">5 лет в строительной отрасли и 3 года в performance-маркетинге. Запускал продукты в РФ и Германии. Ищу роль в B2B с фокусом на GTM, позиционирование и рост партнёрского направления.</p>
+  </div>
+
+  <div class="cover-footer">
+    <a href="#about" class="scroll-hint">
+      <span>Смотреть резюме</span>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+    </a>
+    <div class="cover-contacts-mini">
+      <span>Воронеж</span>
+      <span>•</span>
+      <a href="mailto:sasha.antonenko0404@mail.ru">sasha.antonenko0404@mail.ru</a>
+    </div>
+  </div>
+</header>
+
+<!-- ====== ОСНОВНОЙ КОНТЕНТ ====== -->
 <div class="container">
 
-  <header class="card hero">
-    <div class="avatar" data-initials="ИИ">
-      <img src="photo.jpg" alt="Фото профиля" onerror="this.remove()">
-    </div>
-    <div class="hero-info">
-      <h1>Иван Иванов</h1>
-      <span class="role">Frontend-разработчик</span>
-      <p class="tagline">Создаю быстрые и удобные интерфейсы. 5 лет опыта в React и TypeScript. Живу в ритме большого города.</p>
-      <div class="contacts">
-        <a class="contact" href="mailto:ivan@example.com"><svg class="ic"><use href="#i-mail"/></svg>ivan@example.com</a>
-        <a class="contact" href="tel:+79000000000"><svg class="ic"><use href="#i-phone"/></svg>+7 900 000-00-00</a>
-        <span class="contact"><svg class="ic"><use href="#i-pin"/></svg>Москва</span>
-        <a class="contact" href="https://github.com/username" target="_blank" rel="noopener"><svg class="ic"><use href="#i-github"/></svg>github.com/username</a>
-        <a class="contact" href="https://t.me/username" target="_blank" rel="noopener"><svg class="ic"><use href="#i-send"/></svg>@username</a>
-      </div>
-    </div>
-  </header>
-
-  <section class="card">
+  <section class="card" id="about">
     <h2>О себе</h2>
-    <p>Frontend-разработчик с опытом построения SPA и дизайн-систем с нуля. Люблю чистый код, автоматизацию и забочусь о производительности и доступности интерфейсов. Вдохновляюсь городской культурой и скоростью digital-продуктов.</p>
+    <p>B2B-маркетолог с 5-летним опытом в строительной отрасли (продвижение и продажа оборудования) и 3 годами в performance-маркетинге. Запускал продвижение продукции на рынках России и Германии, участвовал в международных выставках Denkmal в Москве и Лейпциге, выстраивал коммуникации с B2B-партнёрами. Опираюсь на данные и гипотезы, использую ИИ в контентных задачах и в работе с контентом.</p>
   </section>
 
   <div class="grid">
     <div class="col">
-      <section class="card">
+      <!-- БЛОК РАБОТ (ФОТО 1-5) -->
+      <section class="card" id="works">
+        <h2>Разработка продукта «Ватафак»</h2>
+        <p>Дизайн и разработка линейки мерча для паблика <a href="https://vk.ru/vatfk" target="_blank" style="color:var(--sky); font-weight:600; text-decoration:underline;">«Ватафак»</a> (900 тыс. подписчиков).</p>
+        <div class="portfolio-grid">
+          <div class="portfolio-item"><img src="work-1.jpg" alt="Мерч 1"></div>
+          <div class="portfolio-item"><img src="work-2.jpg" alt="Мерч 2"></div>
+          <div class="portfolio-item"><img src="work-3.jpg" alt="Мерч 3"></div>
+          <div class="portfolio-item"><img src="work-4.jpg" alt="Мерч 4"></div>
+          <div class="portfolio-item"><img src="work-5.jpg" alt="Мерч 5"></div>
+        </div>
+      </section>
+
+      <section class="card" id="experience">
         <h2>Опыт работы</h2>
         <div class="timeline">
           <div class="job">
             <div class="job-head">
               <div>
-                <div class="job-title">Frontend-разработчик</div>
-                <div class="job-company">Компания «Пример»</div>
+                <div class="job-title">Менеджер по маркетингу и продажам</div>
+                <div class="job-company">Строительная компания «Саврос»</div>
               </div>
-              <div class="dates">2022 — н.в.</div>
+              <div class="dates">5 лет</div>
             </div>
             <ul>
-              <li>Разработал дизайн-систему на React + Storybook, ускорив запуск новых страниц на 40%.</li>
-              <li>Перевёл проект с JS на TypeScript, сократив число багов в проде на треть.</li>
-              <li>Настроил CI/CD и автотесты (Jest + Playwright).</li>
+              <li>Разрабатывал и реализовывал продвижение гибочных станков по металлу на всех площадках: сайт, соцсети, таргетированная реклама, офлайн-каналы.</li>
+              <li>Организовывал участие в международных и всероссийских выставках, готовил стенды, коммуникационные материалы и презентации, работал с партнёрами и клиентами на стенде.</li>
+              <li>Формировал ценностное предложение и коммерческие материалы для B2B-клиентов (застройщики, подрядчики, объекты).</li>
+              <li>Работал на объектах, участвовал в международных соревнованиях — понимаю реальные задачи и язык отрасли.</li>
+              <li>Вёл переговоры и документооборот с партнёрами на английском языке (B1).</li>
             </ul>
           </div>
           <div class="job">
             <div class="job-head">
               <div>
-                <div class="job-title">Верстальщик / Junior Frontend</div>
-                <div class="job-company">Студия «Ромашка»</div>
+                <div class="job-title">Проекты в инфлюенс- и performance-маркетинге</div>
+                <div class="job-company">Развитие продукта</div>
               </div>
-              <div class="dates">2020 — 2022</div>
+              <div class="dates">Июнь 2022 — н.в.</div>
             </div>
             <ul>
-              <li>Верстал адаптивные лендинги и корпоративные сайты (HTML, SCSS, JS).</li>
-              <li>Оптимизировал скорость загрузки: LCP с 4.2с до 1.8с.</li>
+              <li>Работа с блогерами и пабликами с аудиторией от 100 тыс. до 8 млн подписчиков: подбор площадок, переговоры, интеграции, контроль результата.</li>
+              <li>Партнёрство с крупным пабликом «Ватафак» (900 тыс. подписчиков): интеграции, размещения, спецпроекты.</li>
+              <li>Сотрудничество с продавцами музыкальной индустрии, выход на западный рынок.</li>
+              <li>3 года размещения таргетированной рекламы: тестирование гипотез, анализ аудиторий, работа с рекомендательными алгоритмами соцсетей.</li>
+              <li>Управлял бюджетом таргетированной рекламы от 100к – 250к ₽ в месяц. Средний охват одной публикации 30-100 тыс.</li>
             </ul>
           </div>
         </div>
       </section>
 
-      <section class="card">
-        <h2>Образование</h2>
-        <div class="timeline">
-          <div class="job">
-            <div class="job-head">
-              <div>
-                <div class="job-title">МГУ им. Ломоносова</div>
-                <div class="job-company">Прикладная математика и информатика</div>
-              </div>
-              <div class="dates">2016 — 2020</div>
-            </div>
+      <!-- БЛОК ВЫСТАВОК (ФОТО 7-8) -->
+      <section class="card" id="exhibitions">
+        <h2>Выставки Denkmal</h2>
+        <p>Участие в международных выставках по сохранению, реставрации и популяризации культурного наследия. Подробнее: <a href="https://ru.wikipedia.org/wiki/Denkmal" target="_blank" style="color:var(--sky); font-weight:600; text-decoration:underline;">Wikipedia</a>.</p>
+        <div class="expo-gallery">
+          <div class="expo-item">
+            <img src="expo-1.jpg" alt="Denkmal Москва">
+            <div class="expo-caption">Denkmal Москва <a href="https://denkmal.moscow" target="_blank">denkmal.moscow</a></div>
+          </div>
+          <div class="expo-item">
+            <img src="expo-2.jpg" alt="Denkmal Лейпциг">
+            <div class="expo-caption">Denkmal Лейпциг <a href="https://www.denkmal-leipzig.de/en/" target="_blank">denkmal-leipzig.de</a></div>
           </div>
         </div>
       </section>
     </div>
 
     <div class="col">
-      <section class="card">
+      <section class="card" id="skills">
         <h2>Навыки</h2>
         <div class="skill-group">
-          <h3>Языки и технологии</h3>
+          <h3>Маркетинг и стратегия</h3>
           <ul class="chips">
-            <li>HTML5</li><li>CSS3 / SCSS</li><li>JavaScript</li><li>TypeScript</li><li>React</li><li>Next.js</li>
+            <li>B2B-маркетинг</li><li>GTM-стратегия</li><li>Позиционирование</li><li>Ценностное предложение</li><li>Работа с партнёрами</li>
           </ul>
         </div>
         <div class="skill-group">
-          <h3>Инструменты</h3>
+          <h3>Performance и аналитика</h3>
           <ul class="chips">
-            <li>Git</li><li>Webpack / Vite</li><li>Figma</li><li>Jest</li><li>Docker</li>
+            <li>Таргетированная реклама</li><li>Тестирование гипотез</li><li>A/B-тесты</li><li>Аналитика и метрики</li><li>ИИ-инструменты</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <h3>Дополнительно</h3>
+          <ul class="chips">
+            <li>Организация выставок</li><li>Публичные презентации</li><li>Английский B1</li><li>Разработка мерча</li><li>Дизайн</li>
           </ul>
         </div>
       </section>
 
-      <section class="card">
-        <h2>Языки</h2>
-        <div class="lang"><span>Русский</span><span class="lvl">Родной</span></div>
-        <div class="lang"><span>Английский</span><span class="lvl">C1 — свободный</span></div>
-        <div class="lang"><span>Немецкий</span><span class="lvl">A2</span></div>
-      </section>
-
-      <section class="card">
-        <h2>Дополнительно</h2>
-        <p>Водительские права категории B</p>
-        <p>Готов к удалённой работе</p>
-        <p>Портфолио: <a href="https://example.com" target="_blank" rel="noopener" style="color:var(--emerald);font-weight:700">example.com</a></p>
+      <section class="card" id="contacts">
+        <h2>Контакты</h2>
+        <div class="lang"><span>Город</span><span class="lvl" style="color:var(--text)">Воронеж</span></div>
+        <div class="lang"><span>Телефон</span><a href="tel:+79521019974" style="color:var(--sky); font-weight:700;">+7 952 101-99-74</a></div>
+        <div class="lang"><span>Email</span><a href="mailto:sasha.antonenko0404@mail.ru" style="color:var(--sky); font-weight:700;">sasha.antonenko0404@mail.ru</a></div>
+        <div class="lang"><span>Telegram</span><a href="https://t.me/Rest420" target="_blank" rel="noopener" style="color:var(--sky); font-weight:700;">@Rest420</a></div>
       </section>
     </div>
   </div>
